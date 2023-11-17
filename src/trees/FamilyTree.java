@@ -93,7 +93,7 @@ public class FamilyTree
 	//
 	// Displays a file browser so that user can select the family tree file.
 	//
-	public FamilyTree() throws IOException, TreeException
+	public FamilyTree(String s) throws IOException, TreeException
 	{
 		// User chooses input file. This block doesn't need any work.
 		FileNameExtensionFilter filter = 
@@ -109,8 +109,8 @@ public class FamilyTree
 
 		// Parse the input file. Create a FileReader that reads treeFile. Create a BufferedReader
 		// that reads from the FileReader.
-		FileReader fr = ???
-		BufferedReader br = ???
+		FileReader fr = new FileReader();
+		BufferedReader br = new BufferedReader();
 		String line;
 		while ((line = br.readLine()) != null)
 			addLine(line);
