@@ -33,6 +33,8 @@ public class FamilyTree
         {
             // Add childNode to this node's children list. Also
             // set childNode's parent to this node.
+        	children.add(childNode);
+        	childNode.parent = this;
         }
         
         
@@ -41,12 +43,16 @@ public class FamilyTree
         TreeNode getNodeWithName(String targetName)
         {
             // Does this node have the target name?
-            if (?????)
+            if (this.getName() == targetName)
                 return this;
                     
             // No, recurse. Check all children of this node.
             for (TreeNode child: children)
             {
+            	TreeNode target  = child.getNodeWithName(targetName);
+            	if(target != null) {
+            		return target;
+            	}
                 // If child.getNodeWithName(targetName) returns a non-null node,
                 // then that's the node we're looking for. Return it.
             }
@@ -61,7 +67,11 @@ public class FamilyTree
         ArrayList<TreeNode> collectAncestorsToList()
         {
             ArrayList<TreeNode> ancestors = new ArrayList<>();
-
+            TreeNode current = this.parent;
+            while(current != null) {
+            	ancestors.add(current);
+            	current = current.parent;
+            }
             // ?????  Collect ancestors of this TreeNode into the array list. HINT: going up
             // the nodes of a tree is like traversing a linked list. If that isn’t clear,
             // draw a tree, mark any leaf node, and then mark its ancestors in order from
@@ -109,8 +119,8 @@ public class FamilyTree
 
 		// Parse the input file. Create a FileReader that reads treeFile. Create a BufferedReader
 		// that reads from the FileReader.
-		FileReader fr = new FileReader();
-		BufferedReader br = new BufferedReader();
+		FileReader fr = new FileReader(treeFile);
+		BufferedReader br = new BufferedReader(fr);
 		String line;
 		while ((line = br.readLine()) != null)
 			addLine(line);
@@ -126,7 +136,7 @@ public class FamilyTree
 	private void addLine(String line) throws TreeException
 	{
 		// Extract parent and array of children.
-		int colonIndex = ?? should be the index of the colon in line.
+		int colonIndex = ; //should be the index of the colon in line.
 		if (colonIndex < 0)
 			?? throw a TreeException with a useful message
 		String parent = ?? The substring of line that starts at char #0 and ends just before colonIndex. Check the API for 
